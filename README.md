@@ -76,7 +76,7 @@ Visit `http://localhost:3000` to use the app.
 
 ## API Documentation
 
-Access Swagger/OpenAPI documentation at: `http://localhost:8000/api-docs`
+Access Swagger/OpenAPI documentation at: `http://localhost:3000/docs`
 
 ### Available Endpoints
 

@@ -39,8 +39,10 @@ A full-stack Todo application with Next.js frontend and Laravel backend.
 
 ```bash
 cd api
+cp .env.example .env
 composer install
 php artisan key:generate
+php artisan migrate
 # SQLite is already configured, migrations run automatically
 ```
 

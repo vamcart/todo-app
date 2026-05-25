@@ -47,7 +47,7 @@ php artisan migrate
 ```
 
 **API Port**: `http://localhost:8000`
-**API Docs**: `http://localhost:8000/api-docs`
+**OpenAPI Spec**: `http://localhost:8000/api-docs`
 
 ### Frontend (Next.js Client)
 

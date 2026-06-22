@@ -98,8 +98,8 @@ Access Swagger/OpenAPI documentation at: `http://localhost:3000/docs`
 
 ```bash
 cd api
-composer testing:phpunit
-# or just run:
+php artisan test
+# or
 vendor/bin/phpunit
 ```
 

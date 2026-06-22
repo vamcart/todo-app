@@ -10,7 +10,7 @@ use Tests\TestCase;
 /**
  * Test Todo model behavior including scopes and relationships
  */
-class ModelTest extends TestCase
+class TodoTest extends TestCase
 {
     use RefreshDatabase;
 

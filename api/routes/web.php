@@ -2,6 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 
+Route::get('/', function () {
+    return view('welcome');
+});
+
 // Swagger/OpenAPI docs route accessible without /api prefix
 Route::get('/api-docs', function () {
     $spec = [

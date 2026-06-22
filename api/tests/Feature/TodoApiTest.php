@@ -10,20 +10,22 @@ use Tests\TestCase;
 /**
  * Test Todo API endpoints with CRUD operations and authentication
  */
-class ApiTest extends TestCase
+class TodoApiTest extends TestCase
 {
     use RefreshDatabase;
 
     protected function setUp(): void
     {
         parent::setUp();
+        $apiKey = env('API_KEY');
+        $this->withHeaders(['X-API-Key' => $apiKey]);    
         
         // Ensure we're using SQLite for testing
         $this->artisan('config:clear');
     }
 
     /** @test */
-    public function it_lists_all_todos()
+    public function test_it_lists_all_todos()
     {
         Todo::create([
             'title' => 'Todo 1',
@@ -43,7 +45,7 @@ class ApiTest extends TestCase
     }
 
     /** @test */
-    public function it_creates_a_new_todo()
+    public function test_it_creates_a_new_todo()
     {
         $todo = [
             'title' => 'New Todo',
@@ -60,7 +62,7 @@ class ApiTest extends TestCase
     }
 
     /** @test */
-    public function it_retrieves_single_todo()
+    public function test_it_retrieves_single_todo()
     {
         $todo = Todo::create([
             'title' => 'My Todo',
@@ -80,7 +82,7 @@ class ApiTest extends TestCase
     }
 
     /** @test */
-    public function it_returns_404_for_nonexistent_todo()
+    public function test_it_returns_404_for_nonexistent_todo()
     {
         $response = $this->getJson('/api/todos/99999');
 
@@ -88,7 +90,7 @@ class ApiTest extends TestCase
     }
 
     /** @test */
-    public function it_updates_a_todo()
+    public function test_it_updates_a_todo()
     {
         $todo = Todo::create([
             'title' => 'Original Title',
@@ -120,7 +122,7 @@ class ApiTest extends TestCase
     }
 
     /** @test */
-    public function it_partial_updates_a_todo()
+    public function test_it_partial_updates_a_todo()
     {
         $todo = Todo::create([
             'title' => 'Original Title',
@@ -144,7 +146,7 @@ class ApiTest extends TestCase
     }
 
     /** @test */
-    public function it_deletes_a_todo()
+    public function test_it_deletes_a_todo()
     {
         $todo = Todo::create([
             'title' => 'To Delete',
@@ -161,7 +163,7 @@ class ApiTest extends TestCase
     }
 
     /** @test */
-    public function it_deletes_nonexistent_todo_with_404()
+    public function test_it_deletes_nonexistent_todo_with_404()
     {
         $response = $this->deleteJson('/api/todos/99999');
 
@@ -169,7 +171,7 @@ class ApiTest extends TestCase
     }
 
     /** @test */
-    public function it_filters_todos_by_completed_status_via_query_param()
+    public function test_it_filters_todos_by_completed_status_via_query_param()
     {
         Todo::create([
             'title' => 'Completed',
@@ -192,7 +194,7 @@ class ApiTest extends TestCase
     }
 
     /** @test */
-    public function it_requires_title_field_on_create()
+    public function test_it_requires_title_field_on_create()
     {
         // Create request without title - should fail validation
         $response = $this->postJson('/api/todos', [
@@ -204,7 +206,7 @@ class ApiTest extends TestCase
     }
 
     /** @test */
-    public function it_rejects_empty_title_on_create()
+    public function test_it_rejects_empty_title_on_create()
     {
         // Create request with empty title - should fail validation
         $response = $this->postJson('/api/todos', [
@@ -217,7 +219,7 @@ class ApiTest extends TestCase
     }
 
     /** @test */
-    public function it_does_not_update_todo_when_missing_id()
+    public function test_it_does_not_update_todo_when_missing_id()
     {
         $response = $this->putJson('/api/todos/0', [
             'title' => 'New Title',

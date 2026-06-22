@@ -5,7 +5,7 @@ A full-stack Todo application with Next.js frontend and Laravel backend.
 ## Project Structure
 
 ```
-/home/work/My/1/todo-react/
+/
 ├── api/                    # Laravel API backend
 │   ├── app/Models/Todo.php         # Todo model with scopes
 │   ├── app/Http/Controllers/TodoController.php  # CRUD controller

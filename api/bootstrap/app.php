@@ -3,6 +3,7 @@
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
+use App\Http\Middleware\ApiKeyMiddleware;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -12,6 +13,11 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
+        //Global middleware
+        //$middleware->append(ApiKeyMiddleware::class);
+        //$middleware->appendToGroup('api', [
+            //ApiKeyMiddleware::class,
+        //]);        
         // API routes with Sanctum stateless auth for SPA
         $middleware->statefulApi();
     })

@@ -28,7 +28,11 @@ const API_BASE_URL = 'http://localhost:8000/api';
  * Fetch all todos from the API
  */
 export async function fetchTodos(page: number = 1): Promise<PaginatedTodos> {
-  const response = await fetch(`${API_BASE_URL}/todos`);
+  const response = await fetch(`${API_BASE_URL}/todos`, {
+    headers: {
+        'X-API-Key': 'd9f43933a766ade69b20c1bdab8a83a9',
+    },
+});
   
   if (!response.ok) {
     throw new Error(`Failed to fetch todos: ${response.status} ${response.statusText}`);
@@ -50,6 +54,7 @@ export async function createTodo(data: {
     headers: {
       'Content-Type': 'application/json',
       Accept: 'application/json',
+      'X-API-Key': 'd9f43933a766ade69b20c1bdab8a83a9',
     },
     body: JSON.stringify(data),
   });
@@ -65,11 +70,12 @@ export async function createTodo(data: {
  * Fetch a single todo by ID
  */
 export async function fetchTodo(id: number): Promise<Todo> {
-  const response = await fetch(`${API_BASE_URL}/todos/${id}`, {
+const response = await fetch(`${API_BASE_URL}/todos/${id}`, {
     headers: {
       'Accept': 'application/json',
+      'X-API-Key': 'd9f43933a766ade69b20c1bdab8a83a9',
     },
-  });
+});
   
   if (!response.ok) {
     throw new Error(`Failed to fetch todo ${id}: ${response.status} ${response.statusText}`);
@@ -91,6 +97,7 @@ export async function updateTodo(id: number, data: Partial<{
     headers: {
       'Content-Type': 'application/json',
       Accept: 'application/json',
+      'X-API-Key': 'd9f43933a766ade69b20c1bdab8a83a9',
     },
     body: JSON.stringify(data),
   });
@@ -108,6 +115,9 @@ export async function updateTodo(id: number, data: Partial<{
 export async function deleteTodo(id: number): Promise<void> {
   const response = await fetch(`${API_BASE_URL}/todos/${id}`, {
     method: 'DELETE',
+    headers: {
+      'X-API-Key': 'd9f43933a766ade69b20c1bdab8a83a9',
+    },
   });
 
   if (!response.ok) {

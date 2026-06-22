@@ -22,7 +22,7 @@ export interface PaginatedTodos {
   };
 }
 
-const API_BASE_URL = 'http://localhost:8000/api';
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 /**
  * Fetch all todos from the API
@@ -30,7 +30,7 @@ const API_BASE_URL = 'http://localhost:8000/api';
 export async function fetchTodos(page: number = 1): Promise<PaginatedTodos> {
   const response = await fetch(`${API_BASE_URL}/todos`, {
     headers: {
-        'X-API-Key': 'd9f43933a766ade69b20c1bdab8a83a9',
+        'X-API-Key': process.env.NEXT_PUBLIC_API_KEY!,
     },
 });
   
@@ -54,7 +54,7 @@ export async function createTodo(data: {
     headers: {
       'Content-Type': 'application/json',
       Accept: 'application/json',
-      'X-API-Key': 'd9f43933a766ade69b20c1bdab8a83a9',
+      'X-API-Key': process.env.NEXT_PUBLIC_API_KEY!,
     },
     body: JSON.stringify(data),
   });
@@ -73,7 +73,7 @@ export async function fetchTodo(id: number): Promise<Todo> {
 const response = await fetch(`${API_BASE_URL}/todos/${id}`, {
     headers: {
       'Accept': 'application/json',
-      'X-API-Key': 'd9f43933a766ade69b20c1bdab8a83a9',
+      'X-API-Key': process.env.NEXT_PUBLIC_API_KEY!,
     },
 });
   
@@ -97,7 +97,7 @@ export async function updateTodo(id: number, data: Partial<{
     headers: {
       'Content-Type': 'application/json',
       Accept: 'application/json',
-      'X-API-Key': 'd9f43933a766ade69b20c1bdab8a83a9',
+      'X-API-Key': process.env.NEXT_PUBLIC_API_KEY!,
     },
     body: JSON.stringify(data),
   });
@@ -116,7 +116,7 @@ export async function deleteTodo(id: number): Promise<void> {
   const response = await fetch(`${API_BASE_URL}/todos/${id}`, {
     method: 'DELETE',
     headers: {
-      'X-API-Key': 'd9f43933a766ade69b20c1bdab8a83a9',
+      'X-API-Key': process.env.NEXT_PUBLIC_API_KEY!,
     },
   });
 
